@@ -26,7 +26,7 @@
         body { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; background-color: #f8f9fa; color: #333; margin: 0; padding: 20px; transition: background-color 0.3s, color 0.3s; }
         .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.3s, box-shadow 0.3s; }
         h1 { text-align: center; color: #d9534f; margin-bottom: 25px; }
-        .search-box { margin-bottom: 20px; display: flex; justify-content: center; }
+        .search-box { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
         .search-box input { width: 100%; max-width: 500px; padding: 12px 20px; font-size: 16px; border: 2px solid #ddd; border-radius: 25px; outline: none; transition: border-color 0.3s, background-color 0.3s, color 0.3s; }
         .search-box input:focus { border-color: #d9534f; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -34,7 +34,7 @@
         th { background-color: #f2f2f2; color: #555; font-weight: bold; }
         tr:hover { background-color: #f9f9f9; }
         .no-result { display: none; text-align: center; padding: 20px; color: #999; font-size: 16px; }
-        .update-time { position: absolute; top: 14px; left: 14px; font-size: 0.8em; color: #888; background: rgba(255,255,255,0.85); padding: 3px 10px; border-radius: 12px; }
+        .search-box .update-badge { font-size: 0.8em; color: #888; background: #f2f2f2; padding: 6px 14px; border-radius: 20px; white-space: nowrap; transition: background-color 0.3s, color 0.3s; }
         .legend { text-align: center; font-size: 0.85em; color: #666; margin-bottom: 15px; }
         .legend .swatch { display: inline-block; width: 12px; height: 12px; background-color: #ffc107; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
         tr.new-row { background-color: #fff3cd; }
@@ -51,7 +51,7 @@
             th { background-color: #2a2a2a; color: #ccc; }
             tr:hover { background-color: #2a2a2a; }
             .no-result { color: #777; }
-            .update-time { background: rgba(30,30,30,0.85); color: #bbb; }
+            .search-box .update-badge { background: #2a2a2a; color: #bbb; }
             .legend { color: #aaa; }
             tr.new-row { background-color: #4d3d12; }
             tr.new-row:hover { background-color: #63501a; }
@@ -60,8 +60,6 @@
 </head>
 <body>
 
-<span class="update-time" id="updateTime">更新時間：2026/07/06 20:20</span>
-
 <div class="container">
     <h1>福懋、福壽及泰山油品下游業者清單</h1>
 
@@ -69,6 +67,7 @@
 
     <div class="search-box">
         <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="請輸入縣市、業者名稱或購買品項進行搜尋...">
+        <span class="update-badge" id="updateTime">更新時間：2026/07/06 20:20</span>
     </div>
 
     <table id="oilTable">
