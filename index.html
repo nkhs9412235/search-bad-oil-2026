@@ -87,22 +87,20 @@
             color: #666;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
             align-items: center;
         }
-        .counter-badge {
-            background: #e9ecef;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            color: #495057;
-            display: inline-block;
-            min-width: 30px;
+        /* 調整徽章容器垂直置中，讓圖片徽章與文字排版完美對齊 */
+        .counter-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        /* 隱藏第三方線上人數原本的貼圖，只留下純文字人數 */
+        /* 讓 whos.amung.us 的即時貼圖有些微圓角，視覺更精緻 */
         #wau_classic_oil_live_page img {
-            display: none !important;
+            border-radius: 4px !important;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -388,16 +386,16 @@
     <div id="noResult" class="no-result">沒有找到符合關鍵字的資料</div>
 
     <footer>
-        <div>
-            線上人數：
-            <span class="counter-badge" id="onlineCount">
+        <div class="counter-box">
+            <span>線上人數：</span>
+            <span id="oil_live_page">
                 <script id="_waux3g">var _wau = _wau || []; _wau.push(["classic", "oil_live_page", "x3g"]);</script>
                 <script async src="https://waust.at/c.js"></script>
-            </span> 人
+            </span>
         </div>
-        <div>
-            累積瀏覽人次：
-            <span class="counter-badge" id="totalViews">...</span> 次
+        <div class="counter-box">
+            <span>累積瀏覽人次：</span>
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbadoil.3cblog.idv.tw&count_bg=%23D9534F&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=VIEWS&edge_flat=true" alt="累積瀏覽人次" style="vertical-align: middle;">
         </div>
     </footer>
 </div>
@@ -441,32 +439,6 @@
             table.style.display = "none";
         }
     }
-
-    // =======================================================
-    // 3. 呼叫真實累積計數器 API
-    // =======================================================
-    function fetchRealTotalViews() {
-        // 專屬識別 ID，若未來有需要可以自由改名
-        const myPageId = "github_pages_oil_search_list_2026";
-        const apiUrl = `https://api.hits.io/v1/hits?url=${myPageId}`;
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.value) {
-                    document.getElementById('totalViews').innerText = data.value.toLocaleString();
-                } else {
-                    document.getElementById('totalViews').innerText = "1";
-                }
-            })
-            .catch(error => {
-                console.error("計數器連線失敗:", error);
-                document.getElementById('totalViews').innerText = "系統維護中";
-            });
-    }
-
-    // 網頁載入完成後自動撈取數據
-    window.addEventListener('DOMContentLoaded', fetchRealTotalViews);
 </script>
 
 </body>
